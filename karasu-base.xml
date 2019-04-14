@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
 <html b:css='false' b:js='true' b:responsive='true' b:version='2' expr:dir='data:blog.locale.languageDirection' expr:lang='data:blog.locale.language' prefix='og: http://ogp.me/ns#'>
-<!-- Karasu-base.xml v1.0.1 | github.com/Karasu-themes/karasu-base -->
+<!-- Karasu-base.xml v1.0.2 | github.com/Karasu-themes/karasu-base -->
 <head>
 <!-- Basic data -->
 <meta expr:charset='data:blog.encoding'/>
@@ -61,7 +61,6 @@
    <link expr:href='data:feeds params {alt: "rss"}' title='RSS 2.0' rel='alternate' type='application/rss+xml'/>
 </b:with>
 </b:if>
-
 <!-- Sitelinks Searchbox -->
 <script type='application/ld+json'>
 {
@@ -95,7 +94,7 @@ span.item-control.blog-admin,
 <body>
 
 <!-- General option -->
-<b:with var='option' value='{commentSystem: "blogger", shortName: "disqus_shortname", numCommentFb: "10", defaultImage: "url_image.jpg"}'>
+<b:with var='option' value='{commentSystem: "blogger", shortName: "disqus_shortname", numCommentFb: "10", colorSchemeFb: "light", defaultImage: "url_image.jpg"}'>
 	
 <b:section id="blog">
 	<b:widget id="Blog1" type="Blog">
@@ -128,11 +127,9 @@ span.item-control.blog-admin,
 				<a expr:href='data:post.url'><data:post.title/></a><br/>
 
 				<b:elseif cond='data:view.isPost'/>
+				<data:post.body/>
 
 				<!-- Agrega contenido para las entradas -->
-				<data:post.body/>
-				
-				
 
 				<b:elseif cond='data:view.isPage'/>
 
@@ -158,11 +155,19 @@ span.item-control.blog-admin,
 		</b:includable>
 
 		<b:includable id="comment-facebook">
-			<p>Comentarios facebook</p>
+			<div class="fb-comments" expr:data-numposts='data:option.numCommentFb'  data-width='100%' expr:data-href='data:view.url.canonical' expr:data-colorscheme='data:option.colorSchemeFb'></div>
 		</b:includable>
 
 		<b:includable id="comment-disqus">
-			<p>Cmentarios disqus</p>
+			<div class="comment-disqus"><div id="disqus_thread"></div>
+				<script>
+					var shortName = "<data:option.shortName/>";
+					var disqus_config = function () {
+						this.page.url = "<data:view.url.canonical/>";
+						this.page.title = "<data:view.title.escaped/>";
+					};//<![CDATA[(function() {var d = document, s = d.createElement('script');s.src = 'https://' + shortName + '.disqus.com/embed.js';s.setAttribute('data-timestamp', +new Date());(d.head || d.body).appendChild(s);})();;//]]>
+				</script>   
+			</div>
 		</b:includable>
 
 		<b:includable id="comments">
