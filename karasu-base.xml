@@ -124,10 +124,8 @@ span.item-control.blog-admin,
 			<b:if cond='data:view.isMultipleItems'>
 
 				<!-- Agrega contenido para el home -->
-				<a expr:href='data:post.url'><data:post.title/></a><br/>
 
 				<b:elseif cond='data:view.isPost'/>
-				<data:post.body/>
 
 				<!-- Agrega contenido para las entradas -->
 
