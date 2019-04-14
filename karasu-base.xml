@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:js='true' b:responsive='true' b:version='2' expr:dir='data:blog.locale.languageDirection' expr:lang='data:blog.locale.language' prefix='og: http://ogp.me/ns#'>
+<!-- Karasu-base.xml v1.0 | github.com/Karasu-themes/karasu-base -->
+<head>
+<meta expr:charset='data:blog.encoding'/>
+<title><data:blog.title/></title>
+<b:skin><![CDATA[
+/*=> Reset */
+widget-item-control,
+span.item-control.blog-admin,
+.item-control.blog-admin {
+	display: none;
+}
+
+/*=> Comment editor */
+#comment-editor {
+	border: 0;
+	outline: 0;
+	width: 100%;
+	min-height: 200px;}
+]]></b:skin>
+</head>
+<body>
+
+<!-- General option -->
+<b:with var='option' value='{commentSystem: "blogger", shortName: "disqus_shortname", numCommentFb: "10", defaultImage: "url_image.jpg"}'>
+	
+<b:section id="blog">
+	<b:widget id="Blog1" type="Blog">
+		<b:includable id='main' var='top'>
+			
+			<!-- Loop posts -->
+			
+			<b:if cond='data:view.isMultipleItems'> 
+					<b:loop values='data:posts' var='post'>
+						<b:include name='post' data='post'/>
+					</b:loop>
+				<b:else/>
+					<b:loop values='data:posts' var='post'>
+						<b:include name='post' data='post'/>
+						<b:include name='comment-add' data='post'/>
+					</b:loop>
+			</b:if>
+			<!-- end loop posts -->
+			
+			<!-- pagination -->
+			<b:include name='nextprev'/>
+
+		</b:includable>
+
+		<b:includable id='post' var='post'>
+
+			<b:if cond='data:view.isMultipleItems'>
+
+				<!-- Agrega contenido para el home -->
+				<a expr:href='data:post.url'><data:post.title/></a><br/>
+
+				<b:elseif cond='data:view.isPost'/>
+
+				<!-- Agrega contenido para las entradas -->
+				<data:post.body/>
+				
+				
+
+				<b:elseif cond='data:view.isPage'/>
+
+				<!-- Agrega contenido para las páginas aquí -->
+
+			</b:if>
+		  
+		</b:includable>
+
+		<b:includable id='nextprev'>
+			<b:tag name='div' id='blog-pager' class='blog-pager'>
+				<b:if cond='data:newerPageUrl'><b:tag name='a' expr:href='data:newerPageUrl'><data:newerPageTitle/></b:tag></b:if>
+				<b:if cond='data:olderPageUrl'><b:tag name='a' expr:href='data:olderPageUrl'><data:olderPageTitle/></b:tag></b:if>
+			</b:tag>
+		</b:includable>
+
+		<b:includable id="comment-add">
+			<b:include expr:name='"comment-" + data:option.commentSystem' data='post'/>
+		</b:includable>
+
+		<b:includable id="comment-blogger">
+			<b:include name='comment_picker' data='post'/>
+		</b:includable>
+
+		<b:includable id="comment-facebook">
+			<p>Comentarios facebook</p>
+		</b:includable>
+
+		<b:includable id="comment-disqus">
+			<p>Cmentarios disqus</p>
+		</b:includable>
+
+		<b:includable id="comments">
+			<div class='comments-content'>
+				<div id='comment-holder'><data:post.commentHtml/></div>
+				<b:if cond='data:post.showThreadedComments'>
+					<b:include data='post' name='threaded_comment_js'/>
+				</b:if>
+			</div>
+		</b:includable>
+
+		<b:includable id='comment_picker' var='post'>
+			<div class='comments' id='comments'>
+				<b:class cond='!data:post.allowNewComments' name='noAllowNewComments'/>
+				<b:include name='comments' data='post'/>
+				<b:include data='post' expr:name='data:post.allowNewComments ? "threaded-comment-form" : "status-message"'/>
+			</div>
+		</b:includable>
+
+		<b:includable id='threaded-comment-form' var='post'>
+			<div class='comment-form'>
+				<a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
+				<iframe class='blogger-iframe-colorize blogger-comment-from-post' id='comment-editor' src=''/>
+				<data:post.cmtfpIframe/>
+				<script type='text/javascript'>
+				BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;);
+				</script>
+			</div>
+		</b:includable>
+
+		<b:includable id='threaded_comment_js' var='post'>
+			<script async='async' expr:src='data:post.commentSrc' type='text/javascript'/>
+			<b:template-script inline='true' name='threaded_comments'/>
+			<script type='text/javascript'>
+				blogger.widgets.blog.initThreadedComments(
+					<data:post.commentJso/>,
+					<data:post.commentMsgs/>,
+					<data:post.commentConfig/>);
+			</script>
+		</b:includable>
+
+		<b:includable id='backlinkDeleteIcon' var='backlink'><!--empty--></b:includable>
+		<b:includable id='backlinks' var='post'><!--empty--></b:includable>
+		<b:includable id='threaded_comments' var='post'><!--empty--></b:includable>
+		<b:includable id='comment-form' var='post'><!--empty--></b:includable>
+		<b:includable id='commentDeleteIcon' var='comment'><!--empty--></b:includable>
+		<b:includable id='comment_count_picker' var='post'><!--empty--></b:includable>
+		<b:includable id='feedLinks'><!--empty--></b:includable>
+		<b:includable id='feedLinksBody' var='links'><!--empty--></b:includable>
+		<b:includable id='iframe_comments' var='post'><!--empty--></b:includable>
+		<b:includable id='mobile-index-post' var='post'><!--empty--></b:includable>
+		<b:includable id='mobile-main' var='top'><!--empty--></b:includable>
+		<b:includable id='mobile-nextprev'><!--empty--></b:includable>
+		<b:includable id='mobile-post' var='post'><!--empty--></b:includable>
+		<b:includable id='postQuickEdit' var='post'><!--empty--></b:includable>
+		<b:includable id='shareButtons'><!--empty--></b:includable>
+
+	</b:widget>
+
+</b:section>
+
+</b:with>
+
+</body>
+</html>
