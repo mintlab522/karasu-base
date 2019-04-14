@@ -2,8 +2,8 @@
 
 ## v1.0.1
 
-> Agregadas meta etiquetas
+- Agregadas meta etiquetas
 
 ## v1.0
 
-> versión inicial
+- versión inicial
