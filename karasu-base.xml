@@ -1,10 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
 <html b:css='false' b:js='true' b:responsive='true' b:version='2' expr:dir='data:blog.locale.languageDirection' expr:lang='data:blog.locale.language' prefix='og: http://ogp.me/ns#'>
-<!-- Karasu-base.xml v1.0 | github.com/Karasu-themes/karasu-base -->
+<!-- Karasu-base.xml v1.0.1 | github.com/Karasu-themes/karasu-base -->
 <head>
+<!-- Basic data -->
 <meta expr:charset='data:blog.encoding'/>
-<title><data:blog.title/></title>
+<meta expr:content='data:view.isHomepage ? "website" : "article"' property='og:type'/>
+
+<!-- Responsive viewport -->
+<meta content='width=device-width,initial-scale=1' name='viewport'/>
+
+<!-- App name -->
+<meta expr:content='data:blog.title' name='application-name'/>
+<meta expr:content='data:blog.title' property='og:site_name'/>
+
+<!-- Meta Referrer Tag -->
+<meta content='unsafe-url' name='referrer'/>
+
+<!-- Type of twitter card -->
+<meta content='summary_large_image' name='twitter:card'/>
+
+<!-- favicon -->
+<link expr:href='data:blog.blogspotFaviconUrl' rel='icon' type='image/x-icon'/>
+
+<!-- Url canonical -->
+<meta expr:content='data:view.url.canonical' property='og:url'/>
+<meta expr:content='data:view.url.canonical' name='twitter:url'/>
+<link expr:href='data:view.url.canonical' rel='canonical'/>
+
+<!-- Descripcion -->
+<b:if cond='data:view.description'>
+   <meta expr:content='data:view.description.escaped' property='og:description'/>
+   <meta expr:content='data:view.description.escaped' name='twitter:description'/>
+   <meta expr:content='data:view.description.escaped' name='description'/>
+</b:if>
+  
+<b:if cond='data:view.isError or data:view.isArchive or data:view.isSearch'>
+   <meta content='noindex,follow' name='robots'/>
+</b:if>
+
+<!-- Featured Image -->
+<b:if cond='data:view.featuredImage'>
+   <meta expr:content='data:view.featuredImage' name='twitter:image'/>
+   <meta expr:content='resizeImage(data:view.featuredImage,1200,"1200:630")' property='og:image'/>
+   <meta property='og:image:width' content="1200"/>
+   <meta property='og:image:height' content="630"/>
+</b:if>
+
+<!-- Title -->
+<b:with value='data:view.isError ? data:messages.theresNothingHere : data:view.title.escaped' var='title'>
+   <meta expr:content='data:title' property='og:title'/>
+   <meta expr:content='data:title' name='twitter:title'/>
+   <title><data:title/></title>
+</b:with>
+
+<!-- Feeds -->
+<b:if cond='data:blog.feedLinks'>
+<b:with value='path(data:blog.homepageUrl.canonical,"feeds/posts/default")' var='feeds'>
+   <link expr:href='data:feeds' title='Atom 1.0' rel='alternate' type='application/atom+xml'/>
+   <link expr:href='data:feeds params {alt: "rss"}' title='RSS 2.0' rel='alternate' type='application/rss+xml'/>
+</b:with>
+</b:if>
+
+<!-- Sitelinks Searchbox -->
+<script type='application/ld+json'>
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "<data:blog.homepageUrl.canonical/>",
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "<data:blog.searchUrl/>?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+    }
+}
+</script>
+
 <b:skin><![CDATA[
 /*=> Reset */
 widget-item-control,
