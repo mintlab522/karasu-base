@@ -1,5 +1,9 @@
 # Change log
 
-## 1.0
+## v1.0.1
+
+> Agregadas meta etiquetas
+
+## v1.0
 
 > versión inicial
