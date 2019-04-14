@@ -6,3 +6,7 @@
 ## configuración
 
 > en proceso...
+
+### cretidos
+
+- meta etiquetas para el header cortesía de canvas.xml (by zkreations)
