@@ -7,6 +7,6 @@
 
 > en proceso...
 
-### cretidos
+### Créditos
 
-- meta etiquetas para el header cortesía de canvas.xml (by zkreations)
+- Estructura parcialmente extraída de canvas.xml (by zkreations©)
