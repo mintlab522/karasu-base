@@ -163,7 +163,14 @@ span.item-control.blog-admin,
 					var disqus_config = function () {
 						this.page.url = "<data:view.url.canonical/>";
 						this.page.title = "<data:view.title.escaped/>";
-					};//<![CDATA[(function() {var d = document, s = d.createElement('script');s.src = 'https://' + shortName + '.disqus.com/embed.js';s.setAttribute('data-timestamp', +new Date());(d.head || d.body).appendChild(s);})();;//]]>
+					};
+					//<![CDATA[
+					(function() { // DON'T EDIT BELOW THIS LINE
+					var d = document, s = d.createElement('script');
+					s.src = 'https://' + shortName + '.disqus.com/embed.js';
+					s.setAttribute('data-timestamp', +new Date());
+					(d.head || d.body).appendChild(s);
+					})();//]]>
 				</script>   
 			</div>
 		</b:includable>
@@ -184,6 +191,10 @@ span.item-control.blog-admin,
 				<b:include data='post' expr:name='data:post.allowNewComments ? "threaded-comment-form" : "status-message"'/>
 			</div>
 		</b:includable>
+		
+	    <b:includable id='status-message'>
+	      <b:eval expr='data:view.isPreview ? data:messages.widgetNotAvailableInPreview : data:post.noNewCommentsText'/>
+	    </b:includable>
 
 		<b:includable id='threaded-comment-form' var='post'>
 			<div class='comment-form'>
