@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
 <html b:css='false' b:js='true' b:responsive='true' b:version='2' expr:dir='data:blog.locale.languageDirection' expr:lang='data:blog.locale.language' prefix='og: http://ogp.me/ns#'>
-<!-- Karasu-base.xml v1.0.2 | github.com/Karasu-themes/karasu-base -->
+<!-- Karasu-base.xml v1.0.3 | github.com/Karasu-themes/karasu-base -->
 <head>
 <!-- Basic data -->
 <meta expr:charset='data:blog.encoding'/>
